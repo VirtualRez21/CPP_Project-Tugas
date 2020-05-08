@@ -7,7 +7,8 @@ int pilih;
 
 void input();
 void output();
-void bubbleSort();
+void bubbleSortAscending();
+void bubbleSortDescending();
 void menu();
 void ascii();
 void notif();
@@ -111,7 +112,7 @@ void input(){
     system("cls");
 }
 
-void bubbleSort(){
+void bubbleSortAscending(){
 
     string saveNama, saveBulan, saveTempat, saveSebagai;
     int saveTanggal, saveTahun;
@@ -126,6 +127,51 @@ void bubbleSort(){
                 if(dataUtama[j].dataOther.nama > dataUtama[j+1].dataOther.nama){
 
                     saveNama = dataUtama[j].dataOther.nama;
+
+                    dataUtama[j].dataOther.nama = dataUtama[j+1].dataOther.nama;
+                    dataUtama[j+1].dataOther.nama = saveNama;
+
+                    saveTanggal = dataUtama[j].dataTanggal.tanggal;
+                    dataUtama[j].dataTanggal.tanggal = dataUtama[j+1].dataTanggal.tanggal;
+                    dataUtama[j+1].dataTanggal.tanggal = saveTanggal;
+
+                    saveBulan = dataUtama[j].dataTanggal.bulan;
+                    dataUtama[j].dataTanggal.bulan = dataUtama[j+1].dataTanggal.bulan;
+                    dataUtama[j+1].dataTanggal.bulan = saveBulan;
+
+                    saveTahun = dataUtama[j].dataTanggal.tahun;
+                    dataUtama[j].dataTanggal.tahun = dataUtama[j+1].dataTanggal.tahun;
+                    dataUtama[j+1].dataTanggal.tahun = saveTahun;
+
+                    saveTempat = dataUtama[j].dataOther.tempatLahir;
+                    dataUtama[j].dataOther.tempatLahir = dataUtama[j+1].dataOther.tempatLahir;
+                    dataUtama[j+1].dataOther.tempatLahir = saveTempat;
+
+                    saveSebagai = dataUtama[j].dataOther.kedudukan;
+                    dataUtama[j].dataOther.kedudukan = dataUtama[j+1].dataOther.kedudukan;
+                    dataUtama[j+1].dataOther.kedudukan = saveSebagai;
+                }
+            }
+        }
+    }
+}
+
+void bubbleSortDescending(){
+
+    string saveNama, saveBulan, saveTempat, saveSebagai;
+    int saveTanggal, saveTahun;
+
+    if(banyakTambah == 1){
+        cout cetak endl;
+    }
+
+    else if(banyakTambah > 1){
+        for(int i = 0; i < banyakTambah; i++){
+            for(int j = 0; j < (banyakTambah - i - 1); j++){
+                if(dataUtama[j].dataOther.nama < dataUtama[j+1].dataOther.nama){
+
+                    saveNama = dataUtama[j].dataOther.nama;
+
                     dataUtama[j].dataOther.nama = dataUtama[j+1].dataOther.nama;
                     dataUtama[j+1].dataOther.nama = saveNama;
 
@@ -156,26 +202,79 @@ void bubbleSort(){
 
 void output(){
 	
-	bubbleSort();
-
-    if(banyakTambah == 0){
-    	system("color c");
-        cout cetak "================-[Notifikasi]-================\n";
-        cout cetak "      [!]> Maaf, Data Tidak Tersedia <[!]\n\n";
-    }
-
-    else{
-    	system("color e");
+	int pilihan;
+	
+	if(banyakTambah == 0){
+	system("color c");
+	cout cetak "================-[Notifikasi]-================\n";
+	cout cetak "      [!]> Maaf, Data Tidak Tersedia <[!]\n\n";
+	}
+	
+	else if(banyakTambah == 1){
+		system("color e");
         cout cetak "=====-[Menu Lihat Data]-======================" cetak endl;
-        for(int i = 0; i < banyakTambah; i++) {
-            cout cetak "=================-[Data Ke-" cetak (i+1) cetak "]-================" cetak endl;
-            cout cetak "[+]> Nama               : " cetak dataUtama[i].dataOther.nama cetak endl;
-            cout cetak "[+]> Tanggal Lahir      : " cetak dataUtama[i].dataTanggal.tanggal cetak "-" cetak dataUtama[i].dataTanggal.bulan cetak "-" cetak dataUtama[i].dataTanggal.tahun cetak endl;
-            cout cetak "[+]> Tempat Lahir       : " cetak dataUtama[i].dataOther.tempatLahir cetak endl;
-            cout cetak "[+]> Kedudukan Sebagai  : " cetak dataUtama[i].dataOther.kedudukan cetak endl cetak endl;
+		cout cetak "=================-[Data Ke-1]-================" cetak endl;
+		cout cetak "[+]> Nama               : " cetak dataUtama[0].dataOther.nama cetak endl;
+		cout cetak "[+]> Tanggal Lahir      : " cetak dataUtama[0].dataTanggal.tanggal cetak "-" cetak dataUtama[0].dataTanggal.bulan cetak "-" cetak dataUtama[0].dataTanggal.tahun cetak endl;
+		cout cetak "[+]> Tempat Lahir       : " cetak dataUtama[0].dataOther.tempatLahir cetak endl;
+		cout cetak "[+]> Kedudukan Sebagai  : " cetak dataUtama[0].dataOther.kedudukan cetak endl cetak endl;
+	}
+	else{
+		while(true){
+			cout cetak "==============-[Pilihan Sorting]-=============" cetak endl;
+			cout cetak "[1]> Ascending\n[2]> Descending" cetak endl cetak endl;
+		
+			cout cetak "[+]> Silahkan Masukkan Pilihan : "; cin >> pilihan;
+		
+			if(pilihan == 1){
+				bubbleSortAscending();
+	
+	    		system("color e");
+	        	cout cetak "\n=====-[Menu Lihat Data]-======================" cetak endl;
+	        	for(int i = 0; i < banyakTambah; i++) {
+	            	cout cetak "=================-[Data Ke-" cetak (i+1) cetak "]-================" cetak endl;
+	            	cout cetak "[+]> Nama               : " cetak dataUtama[i].dataOther.nama cetak endl;
+	            	cout cetak "[+]> Tanggal Lahir      : " cetak dataUtama[i].dataTanggal.tanggal cetak "-" cetak dataUtama[i].dataTanggal.bulan cetak "-" cetak dataUtama[i].dataTanggal.tahun cetak endl;
+	            	cout cetak "[+]> Tempat Lahir       : " cetak dataUtama[i].dataOther.tempatLahir cetak endl;
+	            	cout cetak "[+]> Kedudukan Sebagai  : " cetak dataUtama[i].dataOther.kedudukan cetak endl cetak endl;
+	
+	        	}
+	        	break;
+			}
+			
+			else if(pilihan == 2){
+				bubbleSortDescending();
 
-        }
-    }
+	    		system("color e");
+	        	cout cetak "\n=====-[Menu Lihat Data]-======================" cetak endl;
+	        	for(int i = 0; i < banyakTambah; i++) {
+	            	cout cetak "=================-[Data Ke-" cetak (i+1) cetak "]-================" cetak endl;
+	            	cout cetak "[+]> Nama               : " cetak dataUtama[i].dataOther.nama cetak endl;
+	            	cout cetak "[+]> Tanggal Lahir      : " cetak dataUtama[i].dataTanggal.tanggal cetak "-" cetak dataUtama[i].dataTanggal.bulan cetak "-" cetak dataUtama[i].dataTanggal.tahun cetak endl;
+	            	cout cetak "[+]> Tempat Lahir       : " cetak dataUtama[i].dataOther.tempatLahir cetak endl;
+	            	cout cetak "[+]> Kedudukan Sebagai  : " cetak dataUtama[i].dataOther.kedudukan cetak endl cetak endl;
+	
+	        	}
+	        	break;
+			}
+			else{
+				cout cetak endl;
+				system("color c");
+    			cout cetak "================-[Notifikasi]-================\n";
+    			cout cetak "     [!]> Maaf, Pilihan Tidak Tersedia <[!]\n\n";
+    			system("pause");
+    			system("cls");
+    			ascii();
+    			cout cetak "=====-[Menu]-=================================" cetak endl;
+    			cout cetak "[1]> Tambah Data Keluarga" cetak endl;
+    			cout cetak "[2]> Lihat Data Keluarga" cetak endl;
+    			cout cetak "[3]> Keluar" cetak endl cetak endl;
+    			cout cetak "[+]> Silahkan Masukkan Pilihan : " cetak pilih cetak endl cetak endl;
+
+			}
+		}
+	}
+	
     system("pause");
     system("cls");
 }
