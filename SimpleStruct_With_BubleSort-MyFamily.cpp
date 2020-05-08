@@ -126,7 +126,6 @@ void bubbleSort(){
                 if(dataUtama[j].dataOther.nama > dataUtama[j+1].dataOther.nama){
 
                     saveNama = dataUtama[j].dataOther.nama;
-
                     dataUtama[j].dataOther.nama = dataUtama[j+1].dataOther.nama;
                     dataUtama[j+1].dataOther.nama = saveNama;
 
